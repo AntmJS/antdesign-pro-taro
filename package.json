@@ -1,0 +1,144 @@
+{
+  "name": "antdesign-pro-taro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "antdesign-pro-taro模版",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "less"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=6.4",
+    "yarn": ">=1.22"
+  },
+  "browserslist": [
+    "Chrome >= 35",
+    "ChromeAndroid >= 35",
+    "iOS >= 8",
+    "Safari >= 8",
+    "Android >= 4.1",
+    "QQAndroid >= 4.1",
+    "UCAndroid >= 4.1"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "type-enum": [
+        2,
+        "always",
+        [
+          "feat",
+          "fix",
+          "style",
+          "chore",
+          "typings",
+          "docs",
+          "refactor",
+          "test"
+        ]
+      ]
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog",
+      "types": {
+        "feat": {
+          "description": "新功能（feature）"
+        },
+        "fix": {
+          "description": "修补bug"
+        },
+        "style": {
+          "description": "格式（不影响代码运行的变动）"
+        },
+        "chore": {
+          "description": "构建过程或辅助工具的变动"
+        },
+        "typings": {
+          "description": "Typescript 类型错误"
+        },
+        "docs": {
+          "description": "文档（documentation）"
+        },
+        "refactor": {
+          "description": "重构（既不是新增功能，也不是修改bug的代码变动）"
+        },
+        "test": {
+          "description": "增加或修改测试用例"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "eslint": "npx eslint -c eslint.config.js '**/*.{js,jsx,ts,tsx}' && npx tsc -p tsconfig.json --skipLibCheck",
+    "stylelint": "npx stylelint --aei --config stylelint.config.js '**/*.{css,less}'",
+    "prettier": "npx prettier --write '**/*.{js,jsx,ts,tsx,md,html,css,less}'",
+    "watch": "cross-env NODE_ENV=development API_ENV=dev WATCHING=true npx taro build --type h5 --watch",
+    "dev": "cross-env NODE_ENV=production API_ENV=dev npx taro build --type h5",
+    "build": "cross-env NODE_ENV=production API_ENV=real npx taro build --type h5",
+    "prepare": "npx husky install",
+    "api:watch": "antm-api  watch --path ./src/actions --server true --mock true --action true",
+    "api:build": "antm-api  build --path ./src/actions",
+    "rapper": "antm-api  file --path ./src/actions/rapper/types --action true",
+    "swagger": "antm-api swagger --path ./src/actions/swagger/types --url https://petstore.swagger.io/v2/swagger.json"
+  },
+  "author": "",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-components": "^1.1.15",
+    "@antmjs/cache": "^1.21.3",
+    "@antmjs/trace": "^1.21.3",
+    "@antmjs/utils": "^1.21.3",
+    "@antmjs/vantui": "^1.9.21",
+    "@babel/runtime": "^7.7.7",
+    "@tarojs/components": "3.5.3",
+    "@tarojs/helper": "3.5.3",
+    "@tarojs/plugin-framework-react": "3.5.3",
+    "@tarojs/react": "3.5.3",
+    "@tarojs/router": "3.5.3",
+    "@tarojs/runtime": "3.5.3",
+    "@tarojs/shared": "3.5.3",
+    "@tarojs/taro": "3.5.3",
+    "@tarojs/taro-h5": "3.5.3",
+    "antd": "^4.22.5",
+    "cos-wx-sdk-v5": "^1.2.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recoil": "^0.7.4"
+  },
+  "devDependencies": {
+    "@antmjs/eslint": "^1.21.3",
+    "@antmjs/stylelint": "^1.21.3",
+    "@antmjs/warning": "^1.21.3",
+    "@babel/core": "^7.8.0",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
+    "@tarojs/cli": "3.5.3",
+    "@tarojs/webpack5-runner": "3.5.3",
+    "@types/react": "^18.0.0",
+    "@types/webpack-env": "^1.13.6",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-import": "^1.13.5",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-preset-taro": "3.5.3",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.21.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.7.1",
+    "react-refresh": "0.11.0",
+    "stylelint": "^13.13.1",
+    "typescript": "^4.7.4",
+    "webpack": "5.69.0"
+  }
+}
