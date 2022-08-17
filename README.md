@@ -19,9 +19,13 @@
 * 快速支持事件抖动
 
 ## 使用
+1. 执行yarn rapper自动生成action层代码(需要的话)
+2. 执行yarn swagger自动根据服务端swagger api生成action层代码(需要的话)
+3. yarn
+4. yarn watch
+
+## 如果需要添加告警机制
 
 1. 将_antm.config.js 改成 antm.config.js
-2. 执行yarn rapper自动生成action层代码(需要的话)
-3. 执行yarn swagger自动根据服务端swagger api生成action层代码(需要的话)
-5. yarn
-6. yarn watch
+2. 更新antm.config.js里面的webhooks.url的access_token
+3. 将.husky/pre-commit里面的npx antm-warning webhooks 注释取消
