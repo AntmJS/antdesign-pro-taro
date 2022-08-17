@@ -7,7 +7,6 @@
 .idea
 .rn_temp
 .DS_Store
-.api-ui
 
 antm.config.js
 package-lock.json
@@ -20,6 +19,7 @@ src/actions/swagger/*
 !src/actions/swagger/utils
 node_modules
 coverage
+api-ui
 dist
 build
 weapp

@@ -20,7 +20,6 @@
 .prettierignore
 .prettierrc
 .stylelintignore
-.api-ui
 LICENSE
 
 src/actions/rapper/*
@@ -30,6 +29,7 @@ src/actions/swagger/*
 !src/actions/swagger/utils
 node_modules
 coverage
+api-ui
 dist
 build
 weapp
