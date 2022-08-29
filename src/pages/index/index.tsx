@@ -1,4 +1,4 @@
-import { Unite } from '@antmjs/vantui'
+import { Unite } from '@antmjs/unite'
 import {
   ActionType,
   ProTable,
@@ -7,7 +7,7 @@ import {
 } from '@ant-design/pro-components'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { useRef } from 'react'
-import { message, Tooltip } from 'antd'
+import { Tooltip } from 'antd'
 import { getRoleListCommon } from '@/actions/simple/common'
 import Container from '@/components/container'
 // import { petClient } from '@/actions/swagger/petstore'
@@ -71,8 +71,7 @@ export default Unite(
           success: true,
         }
       } else {
-        message.error(res.message)
-        return
+        return this.setError(res as IError)
       }
     },
   },

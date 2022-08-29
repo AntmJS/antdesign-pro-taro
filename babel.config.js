@@ -16,15 +16,6 @@ module.exports = {
     ['lodash'],
     [
       'import',
-      {
-        libraryName: '@antmjs/vantui',
-        libraryDirectory: 'es',
-        style: (name) => `${name}/style/less`,
-      },
-      '@antmjs/vantui',
-    ],
-    [
-      'import',
       { libraryName: 'antd', libraryDirectory: 'lib', style: true },
       'antd',
     ],

@@ -14,7 +14,7 @@ export const userStore = atom({
   default: undefined,
 }) as RecoilState<IUserStore | undefined>
 
-export const globalErrorStore = atom({
-  key: 'globalErrorStore',
-  default: undefined,
-}) as RecoilState<IError | undefined>
+export const needLoginStore = atom({
+  key: 'needLoginStore',
+  default: false,
+}) as RecoilState<boolean>

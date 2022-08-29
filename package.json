@@ -91,10 +91,10 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-components": "^1.1.15",
-    "@antmjs/cache": "^1.21.3",
-    "@antmjs/trace": "^1.21.3",
-    "@antmjs/utils": "^1.21.3",
-    "@antmjs/vantui": "^1.9.23",
+    "@antmjs/cache": "^2.0.2",
+    "@antmjs/trace": "^2.0.2",
+    "@antmjs/unite": "^2.0.2",
+    "@antmjs/utils": "^2.0.2",
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.5.3",
     "@tarojs/helper": "3.5.3",
@@ -114,9 +114,9 @@
     "recoil": "^0.7.4"
   },
   "devDependencies": {
-    "@antmjs/eslint": "^1.21.3",
-    "@antmjs/stylelint": "^1.21.3",
-    "@antmjs/warning": "^1.21.3",
+    "@antmjs/eslint": "^2.0.2",
+    "@antmjs/stylelint": "^2.0.2",
+    "@antmjs/warning": "^2.0.2",
     "@babel/core": "^7.8.0",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
@@ -132,12 +132,12 @@
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.21.0",
+    "eslint": "8.21.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
     "prettier": "^2.7.1",
     "react-refresh": "0.11.0",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.11.0",
     "typescript": "^4.7.4",
     "webpack": "5.69.0"
   }

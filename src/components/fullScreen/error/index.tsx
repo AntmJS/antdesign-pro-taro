@@ -4,17 +4,8 @@ interface IProps {
   error: {
     code: string
     message: string
-    data: any
+    data?: any
   }
-  onRefresh: () => void
-  setError: React.Dispatch<
-    | React.SetStateAction<{
-        code: string
-        message: string
-        data: any
-      }>
-    | undefined
-  >
 }
 
 export default function Index(props: IProps) {

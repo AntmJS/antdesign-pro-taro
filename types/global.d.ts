@@ -17,13 +17,13 @@ declare module 'cos-wx-sdk-v5'
 declare interface IError {
   code: string
   message: string
-  data: any
+  data?: any
 }
 
 declare type CreateFetchResponse<T> = {
   code: string
   header?: any
-  data: T
+  data?: T
   message?: string
 }
 

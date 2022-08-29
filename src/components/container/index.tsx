@@ -5,14 +5,14 @@ import {
   useContext,
   useEffect,
 } from 'react'
-import { message } from 'antd'
-import { UniteContext, Popup } from '@antmjs/vantui'
+import { message, Modal } from 'antd'
+import { UniteContext } from '@antmjs/unite'
 import { EMlf } from '@antmjs/trace'
 import { useDidShow } from '@tarojs/taro'
 import { useRecoilValue } from 'recoil'
 import { monitor } from '@/trace'
 import { LOGIN_CODE } from '@/constants'
-import { globalErrorStore } from '@/store'
+import { needLoginStore } from '@/store'
 import Error from '../fullScreen/error'
 import Login from '../fullScreen/login'
 import Loading from '../fullScreen/loading'
@@ -74,7 +74,7 @@ export default function Index(props: IProps) {
   const { navTitle, loading, ignoreError } = props
   const ctx = useContext(UniteContext)
   const [loginStatus, setLoginStatus] = useState(false)
-  const globalError = useRecoilValue(globalErrorStore)
+  const needLogin = useRecoilValue(needLoginStore)
 
   useDidShow(() => {
     // 设置title
@@ -89,12 +89,14 @@ export default function Index(props: IProps) {
   })
 
   // 异常来自于三个部分 1: Request Code 2 JSError 3: BoundaryError
+  // 有初始数据但是请求接口报错了，则toast。JSError BoundaryError Login 三个直接展示全屏错误
   useEffect(() => {
     if (
       !loading &&
       ctx.error &&
       ctx.error.code !== 'JSError' &&
-      ctx.error.code !== 'BoundaryError'
+      ctx.error.code !== 'BoundaryError' &&
+      ctx.error.code !== LOGIN_CODE
     ) {
       if (!ignoreError) {
         message.error(ctx.error.message)
@@ -105,76 +107,42 @@ export default function Index(props: IProps) {
   }, [ctx.error, loading])
 
   useEffect(() => {
-    if (
-      (loading && ctx.error && !ignoreError && ctx.error.code === LOGIN_CODE) ||
-      globalError?.code === LOGIN_CODE
-    ) {
+    // Login报错 直接展示全屏错误
+    if ((ctx.error && ctx.error.code === LOGIN_CODE) || needLogin) {
       setLoginStatus(true)
     }
-  }, [loading, ctx, ignoreError, globalError])
+  }, [ctx, needLogin])
 
   function render() {
+    // JSError、 BoundaryError、 没有初始数据并且报错并且不是登录错误  则全屏展示
     if (
-      loading ||
       ctx.error?.code === 'JSError' ||
       ctx.error?.code === 'BoundaryError' ||
-      globalError
+      (loading && ctx.error && ctx.error?.code !== LOGIN_CODE)
     ) {
-      if (globalError && globalError.code === LOGIN_CODE) {
-        return (
-          <Error
-            setError={ctx.setError as any}
-            onRefresh={ctx.onRefresh}
-            error={globalError}
-          />
-        )
-      }
-      if (ctx.error) {
-        if (ignoreError) return <></>
-        if (ctx.error.code !== LOGIN_CODE)
-          return (
-            <Error
-              setError={ctx.setError as any}
-              onRefresh={ctx.onRefresh}
-              error={ctx.error}
-            />
-          )
-      } else {
-        return <Loading />
-      }
+      if (ignoreError || needLogin) return <></>
+      return <Error error={ctx.error} />
     }
-    return (
-      <>
-        <>{props.children}</>
-        <Popup
-          show={loginStatus}
-          className="popup-with-login"
-          closeIconPosition="top-right"
-          position="bottom"
-          closeable={false}
-          safeAreaInsetTop
-          style={{
-            height: '100vh',
-          }}
-          onClose={async () => {
-            setLoginStatus(false)
-            ctx.setError(undefined)
-            ctx.onRefresh()
-          }}
-        >
-          <Login
-            setLoginStatus={setLoginStatus}
-            setError={ctx.setError as any}
-            onRefresh={ctx.onRefresh}
-          />
-        </Popup>
-      </>
-    )
+    if (loading) return <Loading />
+    return <>{props.children}</>
   }
 
   return (
     <ErrorBoundary setError={ctx.setError}>
       <>{render()}</>
+      <Modal
+        visible={loginStatus}
+        title="登录"
+        width={'100vw'}
+        className="popup-with-login"
+        onCancel={async () => {
+          setLoginStatus(false)
+          ctx.setError(undefined)
+          ctx.onRefresh()
+        }}
+      >
+        <Login />
+      </Modal>
     </ErrorBoundary>
   )
 }

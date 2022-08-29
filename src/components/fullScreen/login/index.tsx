@@ -17,21 +17,7 @@ import {
 import { Alert, message, Tabs } from 'antd'
 import { cacheSetSync } from '@/cache'
 import { loginCommon, getFakeCaptcha } from '@/actions/simple/common'
-import Footer from '@/components/footer'
 import './index.less'
-
-interface IProps {
-  setLoginStatus: React.Dispatch<React.SetStateAction<boolean>>
-  onRefresh: () => void
-  setError: React.Dispatch<
-    | React.SetStateAction<{
-        code: string
-        message: string
-        data: any
-      }>
-    | undefined
-  >
-}
 
 const LoginMessage: React.FC<{
   content: string
@@ -49,7 +35,7 @@ const LoginMessage: React.FC<{
   )
 }
 
-const Login: FC<IProps> = (_props) => {
+const Login: FC = (_props) => {
   const [userLoginState, setUserLoginState] = useState<any>({})
   const [type, setType] = useState<string>('account')
 
@@ -229,7 +215,6 @@ const Login: FC<IProps> = (_props) => {
           </div>
         </LoginForm>
       </div>
-      <Footer />
     </div>
   )
 }

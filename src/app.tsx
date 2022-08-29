@@ -1,6 +1,6 @@
 import type { BasicLayoutProps, MenuDataItem } from '@ant-design/pro-components'
 import { HeartOutlined, SmileOutlined } from '@ant-design/icons'
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, message } from 'antd'
 import { ProLayout } from '@ant-design/pro-components'
 import { useEffect } from 'react'
 import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil'
@@ -21,9 +21,10 @@ import Footer from '@/components/footer'
 import Loading from '@/components/fullScreen/loading'
 import RightContent from '@/components/rightContent'
 import { Index_Page } from './constants/config'
-import { userStore, globalErrorStore } from './store'
+import { userStore, needLoginStore } from './store'
 import './cache'
 import './app.less'
+import { LOGIN_CODE } from './constants'
 
 let cachePages
 const IconMap = {
@@ -36,7 +37,7 @@ moment.locale('zh-cn')
 
 function IndexCom(props: any) {
   const [user, setUser] = useRecoilState(userStore)
-  const setLoginError = useSetRecoilState(globalErrorStore)
+  const setNeedLoginStore = useSetRecoilState(needLoginStore)
 
   useEffect(() => {
     getUserInfoCommon({}, 'info').then((res) => {
@@ -48,12 +49,10 @@ function IndexCom(props: any) {
           avatar:
             'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
         })
+      } else if (res.code === LOGIN_CODE) {
+        setNeedLoginStore(true)
       } else {
-        setLoginError({
-          code: res.code,
-          message: res.message!,
-          data: res.data,
-        })
+        message.error(res.message)
       }
     })
     return function () {
@@ -124,11 +123,6 @@ function IndexCom(props: any) {
           ]
           return loopMenuItem(res.data)
         } else {
-          setLoginError({
-            code: res.code,
-            message: res.message!,
-            data: res.data,
-          })
           return []
         }
       },

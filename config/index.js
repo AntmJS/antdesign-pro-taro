@@ -81,7 +81,6 @@ const config = {
         chain.output.publicPath(`/`)
       }
     },
-    esnextModules: [/@antmjs[\\/]vantui/],
     lessLoaderOption: {
       lessOptions: {
         javascriptEnabled: true,
