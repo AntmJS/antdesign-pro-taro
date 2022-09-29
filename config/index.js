@@ -38,6 +38,10 @@ const config = {
       process.cwd(),
       './node_modules/regenerator-runtime',
     ),
+    '@babel/runtime/regenerator': npath.resolve(
+      process.cwd(),
+      './node_modules/regenerator-runtime',
+    ),
     '@': npath.resolve(process.cwd(), 'src'),
   },
   defineConstants: {},
