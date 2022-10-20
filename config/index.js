@@ -102,7 +102,7 @@ const config = {
     },
     devServer: {
       port: 10086,
-      hot: true,
+      hot: false,
       host: '0.0.0.0',
       historyApiFallback: true,
       headers: {
